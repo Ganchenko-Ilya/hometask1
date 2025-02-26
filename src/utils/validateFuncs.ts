@@ -24,7 +24,7 @@ const isValidResolutionsFunc = (availableResolutions: Resolutions[]) => {
             return true
         } else {
             errors.errorsMessages.push({
-                message: `At least one resolution should be added: ${Object.values(Resolutions).join(', ')}`,
+                message: `At least one resolution should be added: ${Object.values(Resolutions).join(',')}`,
                 field: 'availableResolutions'
 
             })
