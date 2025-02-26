@@ -14,6 +14,12 @@ app.get('/videos', (req: Request, res: Response) => {
     res.status(200).send(db)
 
 })
+app.get('/videos:id', (req: Request, res: Response) => {
+    const id = req.body.id
+    const video = db.find(el => el.id === id)
+    res.status(200).send(video)
+
+})
 
 
 app.post('/videos', (req: Request<unknown, unknown, ReqPostType>, res: Response<DbType | ErrorResType>) => {
