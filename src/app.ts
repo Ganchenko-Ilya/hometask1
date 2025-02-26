@@ -2,7 +2,7 @@ import express, {Request, Response} from 'express'
 import {DbType, ErrorResType, ReqPostType} from "./db/types";
 import {createNewDate, generateUniqueId} from "./utils/libFunc";
 import {isCreateVideoRequestValid} from "./utils/validateFuncs";
-import {errors} from "./db/db";
+import {db, errors} from "./db/db";
 
 
 export const app = express();
@@ -10,8 +10,8 @@ export const app = express();
 app.use(express.json())
 
 
-app.get('/', (req: Request, res: Response) => {
-    res.status(200).send('Hello world!!!!!')
+app.get('/videos', (req: Request, res: Response) => {
+    res.status(200).send(db)
 
 })
 
@@ -34,6 +34,7 @@ app.post('/videos', (req: Request<unknown, unknown, ReqPostType>, res: Response<
             publicationDate: date,
             availableResolutions
         }
+        db.push(newVideos)
         res.status(201).send(newVideos)
     } else {
         res.status(400).send(errors)
