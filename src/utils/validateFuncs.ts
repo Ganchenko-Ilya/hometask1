@@ -4,8 +4,8 @@ import {errors} from "../db/db";
 import {createErrorMessage} from "./libFunc";
 
 
-const isValidInputFunc = (fieldName: string, maxLength: number) => {
-    const valueLength = fieldName.trim().length
+const isValidInputFunc = (fieldName: string, value: string, maxLength: number) => {
+    const valueLength = value.trim().length
 
     if (valueLength && valueLength < maxLength && valueLength > 0) {
         return true
@@ -38,8 +38,8 @@ const isValidResolutionsFunc = (availableResolutions: Resolutions[]) => {
 
 
 export const isCreateVideoRequestValid = (title: string, author: string, availableResolutions: Resolutions[]) => {
-    const isValidTitle = isValidInputFunc(title, ERRORS.MAX_LENGTH.TITLE)
-    const isValidAuthor = isValidInputFunc(author, ERRORS.MAX_LENGTH.AUTHOR)
+    const isValidTitle = isValidInputFunc('title', title, ERRORS.MAX_LENGTH.TITLE)
+    const isValidAuthor = isValidInputFunc('author', author, ERRORS.MAX_LENGTH.AUTHOR)
     const isValidResolutions = isValidResolutionsFunc(availableResolutions);
     return isValidTitle && isValidAuthor && isValidResolutions
 
