@@ -16,7 +16,7 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 
-app.post('/hometask_01/api/videos', (req: Request<unknown, unknown, ReqPostType>, res: Response<DbType | ErrorResType>) => {
+app.post('/videos', (req: Request<unknown, unknown, ReqPostType>, res: Response<DbType | ErrorResType>) => {
     const {author, title, availableResolutions} = req.body
 
     const isRequestBodyValidate = isCreateVideoRequestValid(title, author, availableResolutions)
