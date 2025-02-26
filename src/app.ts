@@ -14,10 +14,14 @@ app.get('/videos', (req: Request, res: Response) => {
     res.status(200).send(db)
 
 })
-app.get('/videos:id', (req: Request, res: Response) => {
+app.get('/videos/:id', (req: Request, res: Response) => {
     const id = req.body.id
     const video = db.find(el => el.id === id)
-    res.status(200).send(video)
+    if (video) {
+        res.status(200).send(video)
+    } else {
+        res.status(404)
+    }
 
 })
 
