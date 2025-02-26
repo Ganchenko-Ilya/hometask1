@@ -5,15 +5,27 @@ import {createErrorMessage} from "./libFunc";
 
 
 const isValidInputFunc = (fieldName: string, value: string, maxLength: number) => {
-    const valueLength = value.trim().length
-
-    if (valueLength && valueLength < maxLength && valueLength > 0) {
-        return true
+    if (value) {
+        const valueLength = value.trim().length
+        if (valueLength < maxLength && valueLength > 0) {
+            return true
+        } else {
+            errors.errorsMessages.push(createErrorMessage(fieldName, maxLength))
+            return false
+        }
     } else {
         errors.errorsMessages.push(createErrorMessage(fieldName, maxLength))
         return false
     }
 
+}
+
+const errorMessageREsolutionsFunc = () => {
+    errors.errorsMessages.push({
+        message: `At least one resolution should be added: ${Object.values(Resolutions).join(',')}`,
+        field: 'availableResolutions'
+
+    })
 }
 
 const isValidResolutionsFunc = (availableResolutions: Resolutions[]) => {
@@ -23,15 +35,12 @@ const isValidResolutionsFunc = (availableResolutions: Resolutions[]) => {
         if (isValidResolutions) {
             return true
         } else {
-            errors.errorsMessages.push({
-                message: `At least one resolution should be added: ${Object.values(Resolutions).join(',')}`,
-                field: 'availableResolutions'
-
-            })
+            errorMessageREsolutionsFunc()
             return false
         }
 
     } else {
+        errorMessageREsolutionsFunc()
         return false
     }
 }
