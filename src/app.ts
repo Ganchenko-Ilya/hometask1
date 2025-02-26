@@ -36,7 +36,7 @@ app.post('/hometask_01/api/videos', (req: Request<unknown, unknown, ReqPostType>
         }
         res.status(201).send(newVideos)
     } else {
-        res.status(400).send(errors.errorsMessages)
+        res.status(400).send(errors)
         errors.errorsMessages = []
     }
 
