@@ -2,7 +2,7 @@ import express, {Request, Response} from 'express'
 import {DbType, ErrorResType, ReqPostType} from "./db/types";
 import {createNewDate, generateUniqueId} from "./utils/libFunc";
 import {isCreateVideoRequestValid} from "./utils/validateFuncs";
-import {db, errors} from "./db/db";
+import {db, dbDeleteId, errors} from "./db/db";
 
 
 export const app = express();
@@ -19,6 +19,19 @@ app.get('/videos/:id', (req: Request, res: Response) => {
     const video = db.find(el => el.id === id)
     if (video) {
         res.status(200).send(video)
+    } else {
+        res.status(404)
+    }
+
+})
+app.delete('/videos/:id', (req: Request, res: Response) => {
+    const id = +req.params.id
+
+    const video = db.find(el => el.id === id);
+    
+    if (videos) {
+        dbDeleteId(id)
+        res.status(204)
     } else {
         res.status(404)
     }
