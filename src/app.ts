@@ -53,8 +53,8 @@ app.post('/videos', (req: Request<unknown, unknown, ReqPostType>, res: Response<
             author,
             canBeDownloaded: false,
             minAgeRestriction: null,
-            createdAt: date,
-            publicationDate: date,
+            createdAt: date.createdAtDate,
+            publicationDate: date.publicationDate,
             availableResolutions
         }
         db.push(newVideos)

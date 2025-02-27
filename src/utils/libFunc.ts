@@ -10,7 +10,10 @@ export const createErrorMessage = (fieldName: string, maxLength: number) => {
 }
 
 export const createNewDate = () => {
+    const createdAtDate = new Date().toISOString()
     const date = new Date();
-    date.setUTCDate(date.getUTCDate() + 1); // Добавляем один день
-    return date.toISOString();
+    date.setUTCDate(date.getUTCDate() + 1)
+    const publicationDate = date.toISOString();
+    ; // Добавляем один день
+    return {createdAtDate, publicationDate};
 } // Преобразуем в ISO формат } new Date().toISOString()
