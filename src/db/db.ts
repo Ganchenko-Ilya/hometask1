@@ -5,7 +5,7 @@ export let db: DbType[] = [];
 
 export const dbDeleteId = (id: number) => {
     const videos = db.filter(el => el.id !== id)
-    db = videos;
+    db = [...videos];
 }
 
 export const errors: ErrorsMessageType = {errorsMessages: []}
