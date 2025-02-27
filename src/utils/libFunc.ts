@@ -9,4 +9,8 @@ export const createErrorMessage = (fieldName: string, maxLength: number) => {
     }
 }
 
-export const createNewDate = () => new Date().toISOString()
+export const createNewDate = () => {
+    const date = new Date();
+    date.setUTCDate(date.getUTCDate() + 1); // Добавляем один день
+    return date.toISOString();
+} // Преобразуем в ISO формат } new Date().toISOString()
