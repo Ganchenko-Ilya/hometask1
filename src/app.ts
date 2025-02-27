@@ -20,7 +20,7 @@ app.get('/videos/:id', (req: Request, res: Response) => {
     if (video) {
         res.status(200).send(video)
     } else {
-        res.status(404)
+        res.status(404).end()
     }
 
 })
