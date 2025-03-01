@@ -5,7 +5,7 @@ export type DbType = {
     "title": string,
     "author": string,
     "canBeDownloaded": boolean,
-    "minAgeRestriction": null,
+    "minAgeRestriction": null | number,
     "createdAt": string,
     "publicationDate": string,
     "availableResolutions": Resolutions[]
@@ -14,6 +14,16 @@ export type ReqPostType = {
     title: string,
     author: string,
     availableResolutions: Resolutions[]
+}
+
+export type ReqPutType = {
+    canBeDownloaded: boolean,
+    minAgeRestriction: null | number,
+    publicationDate: string,
+    title: string,
+    author: string,
+    availableResolutions: Resolutions[]
+    
 }
 
 export type ErrorsMessageType = {
