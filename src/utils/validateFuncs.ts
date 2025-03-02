@@ -77,8 +77,9 @@ const isBoolean = (value: any) => {
 };
 
 const isPublicationDateValid = (publicationDate: string) => {
-  const isDateISOValid = Date.parse(publicationDate);
-  if (!isNaN(isDateISOValid)) {
+  const reg = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?(Z|([-+]\d{2}:\d{2}))?$/;
+
+  if (reg.test(publicationDate)) {
     return true;
   } else {
     errors.errorsMessages.push({

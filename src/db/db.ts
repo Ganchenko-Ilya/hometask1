@@ -1,6 +1,5 @@
 import { DbType, ErrorsMessageType, ReqPostType, ReqPutType } from './types';
-import { createNewDate, createNewVideo, generateUniqueId } from '../utils/libFunc';
-import { Response } from 'express';
+import { createNewVideo } from '../utils/libFunc';
 
 export let db: DbType[] = [];
 
@@ -10,10 +9,14 @@ export const getDb = () => {
   return db;
 };
 
+export const allDeleteDb = () => {
+  db = [];
+};
+
 export const searchVideoId = (id: number) => {
   return db.find((el) => el.id === id);
 };
-export const getVideoId = (id: number) => {};
+
 export const addVideo = (reqBody: ReqPostType) => {
   const { availableResolutions, author, title } = reqBody;
   const newVideo = createNewVideo(title, author, availableResolutions);

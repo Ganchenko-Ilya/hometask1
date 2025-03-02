@@ -1,7 +1,16 @@
 import express, { Request, Response } from 'express';
 import { DbType, ErrorsMessageType, ReqPostType, ReqPutType } from './db/types';
 import { isChangeVideoRequestValid, isCreateVideoRequestValid } from './utils/validateFuncs';
-import { addVideo, changeDb, clearErrorsMessage, dbDeleteId, getDb, getErrors, searchVideoId } from './db/db';
+import {
+  addVideo,
+  allDeleteDb,
+  changeDb,
+  clearErrorsMessage,
+  dbDeleteId,
+  getDb,
+  getErrors,
+  searchVideoId,
+} from './db/db';
 import * as core from 'express-serve-static-core';
 
 export const app = express();
@@ -51,7 +60,7 @@ app.put(
     if (isValidBodyRequest) {
       const video = searchVideoId(id);
       if (video) {
-        changeDb(+req.params.id, req.body);
+        changeDb(id, req.body);
         res.status(204).end();
       } else {
         res.status(404).end();
@@ -62,3 +71,8 @@ app.put(
     }
   },
 );
+
+app.delete('/testing/all-data', (req: Request, res: Response) => {
+  allDeleteDb();
+  res.status(204).end();
+});
