@@ -1,11 +1,11 @@
 import { Resolutions } from '../db/enum';
 import { ERRORS } from '../variables/errors';
 import { errors, getErrors } from '../db/db';
-import { createErrorMessage } from './libFunc';
+import { createErrorMessage, regDateISO } from './libFunc';
 import { ReqPutType } from '../db/types';
 
 const isValidInputFunc = (fieldName: string, value: string, maxLength: number) => {
-  if (value) {
+  if (value && typeof value === 'string') {
     const valueLength = value.trim().length;
     if (valueLength < maxLength && valueLength > 0) {
       return true;
@@ -21,13 +21,13 @@ const isValidInputFunc = (fieldName: string, value: string, maxLength: number) =
 
 const errorMessageREsolutionsFunc = () => {
   errors.errorsMessages.push({
-    message: `At least one resolution should be added: ${Object.values(Resolutions).join(',')}`,
+    message: `At Array least one resolution should be added: ${Object.values(Resolutions).join(',')}`,
     field: 'availableResolutions',
   });
 };
 
 const isValidResolutionsFunc = (availableResolutions: Resolutions[]) => {
-  if (availableResolutions.length) {
+  if (availableResolutions.length && Array.isArray(availableResolutions)) {
     const isValidResolutions = !availableResolutions.some((el) => !Object.values(Resolutions).includes(el));
     if (isValidResolutions) {
       return true;
@@ -42,7 +42,7 @@ const isValidResolutionsFunc = (availableResolutions: Resolutions[]) => {
 };
 
 const isValidMinAgeRestriction = (age: number | null) => {
-  if (typeof age === 'object') {
+  if (age === null) {
     return true;
   }
   const numberAge = +age;
@@ -50,7 +50,7 @@ const isValidMinAgeRestriction = (age: number | null) => {
     return true;
   } else {
     errors.errorsMessages.push({
-      message: 'Age from 1 to 18 inclusive, or without restriction.',
+      message: 'Age from 1 to 18 inclusive(type number), or without restriction.',
       field: 'minAgeRestriction',
     });
     return false;
@@ -77,9 +77,7 @@ const isBoolean = (value: any) => {
 };
 
 const isPublicationDateValid = (publicationDate: string) => {
-  const reg = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?(Z|([-+]\d{2}:\d{2}))?$/;
-
-  if (reg.test(publicationDate)) {
+  if (regDateISO.test(publicationDate)) {
     return true;
   } else {
     errors.errorsMessages.push({

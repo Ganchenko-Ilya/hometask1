@@ -1,4 +1,4 @@
-import { Resolutions } from "../db/enum";
+import { Resolutions } from '../db/enum';
 
 export const generateUniqueId = () => {
   return Date.now() + Math.floor(Math.random() * 1000);
@@ -6,7 +6,7 @@ export const generateUniqueId = () => {
 
 export const createErrorMessage = (fieldName: string, maxLength: number) => {
   return {
-    message: `The ${fieldName} should not be empty and no more than  ${maxLength} characters!!!`,
+    message: `The ${fieldName} should be type string and should not be empty and no more than  ${maxLength} characters!!!`,
     field: fieldName,
   };
 };
@@ -19,11 +19,7 @@ export const createNewDate = () => {
   return { createdAtDate, publicationDate };
 };
 
-export const createNewVideo = (
-  title: string,
-  author: string,
-  availableResolutions: Resolutions[],
-) => ({
+export const createNewVideo = (title: string, author: string, availableResolutions: Resolutions[]) => ({
   id: generateUniqueId(),
   title,
   author,
@@ -33,3 +29,5 @@ export const createNewVideo = (
   publicationDate: createNewDate().publicationDate,
   availableResolutions,
 });
+
+export const regDateISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?(Z|([-+]\d{2}:\d{2}))?$/;

@@ -1,8 +1,8 @@
-import { DbType, ReqPostType } from '../db/types';
+import { DbType, ReqPostType } from '../../db/types';
 
-import { regDateISO } from '../utils/libFunc';
+import { regDateISO } from '../../utils/libFunc';
 import { agent } from 'supertest';
-import { app } from '../app';
+import { app } from '../../app';
 
 export const request = agent(app);
 
